@@ -1,6 +1,21 @@
+
 <a href="<%= url_for(dog) %>">
-  <article>
-    <h2 class="dog-name"><%= dog.name %></h2>
-    <%= image_tag url_for(dog.images.first), class: "dog-photo", alt: "Photo of #{dog.name}" %>
-  </article>
+<div class="mdl-card demo-card-square mdl-cell mdl-cell--4-col mdl-cell--8-col-tablet mdl-shadow--4d" style="width: 320px; height: 320px;color: #fff;">
+  <div 
+    class="mdl-card__title" 
+    style="background: url(<%= url_for(dog.images.first) %>) center / cover;height:250px;"
+  >
+    <h2 class="mdl-card__title-text"><%= dog.name %></h2>
+  </div>
+
+  <div class="mdl-card__supporting-text">
+    <span class="mdl-chip">
+      <span class="mdl-chip__text"><%= dog.likes.count %> <%= (dog.likes.count) == 1 ? 'Like' : 'Likes'%></span>
+    </span>
+   
+  </div>
+</div>
 </a>
+<% if dog.id % 2 == 0 %>
+    <%= image_tag("ad.jpg") %>
+<% end %>

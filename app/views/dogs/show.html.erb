@@ -1,13 +1,43 @@
-<section>
-  <h2><%= @dog.name %></h2>
+<div class="mdl-card">
+  <div id="myGallery" class="carousel slide" data-ride="carousel" style="width: 300px;">
+      <div class="carousel-inner" role="listbox">
 
-  <% @dog.images.each do |image| %>
-    <%= image_tag url_for(image), alt: "Photo of #{@dog.name}" %>
-  <% end %>
+        <% @dog.images.each_with_index do |image, index| %>
+          <div class="item <%= index == 0 ? 'active' : '' %>">
+            <%= image_tag(url_for(image), class: "img-responsive", alt: "Photo of #{@dog.name}")%>
+          </div>
+        <% end %>
+        
+      </div>
+        <a class="left carousel-control" href="#myGallery" role="button" data-slide="prev">
+          <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+        </a>
+        <a class="right carousel-control" href="#myGallery" role="button" data-slide="next">
+          <span class="glyphicon glyphicon-chevron-right"></span>
+        </a>
+    </div>
+  <div 
+    class="mdl-card__title"
+  >
+    <h2 class="mdl-card__title-text"><%= @dog.name %></h2>
+  </div>
 
-  <p><%= @dog.description %></p>
+  <div class="mdl-card__supporting-text">
+    <p><%= @dog.description %></p>
+    <span class="mdl-chip">
+      <span class="mdl-chip__text"><%= @dog.likes.count %> <%= (@dog.likes.count) == 1 ? 'Like' : 'Likes'%></span>
+    </span>
+   
+  </div>
+  <div class="mdl-card__actions">
+    <% if can? :manage, @dog %>
+      <%= link_to "Edit #{@dog.name}'s Profile", edit_dog_path %>
+      <br>
+      <%= link_to "Delete #{@dog.name}'s Profile", dog_path, method: :delete, data: { confirm: 'Are you sure?' } %>
+    <% end %>
+    <% if cannot? :manage, @dog %>      
+      <%= button_to 'Like', dog_likes_path(@dog), method: :post, class: "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"%>
+    <% end %>
+  </div>
+</div>
 
-  <%= link_to "Edit #{@dog.name}'s Profile", edit_dog_path %>
-  <br>
-  <%= link_to "Delete #{@dog.name}'s Profile", dog_path, method: :delete, data: { confirm: 'Are you sure?' } %>
-</section>

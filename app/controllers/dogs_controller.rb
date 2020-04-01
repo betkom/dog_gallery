@@ -1,10 +1,18 @@
 class DogsController < ApplicationController
   before_action :set_dog, only: [:show, :edit, :update, :destroy]
+  load_and_authorize_resource
 
   # GET /dogs
   # GET /dogs.json
   def index
-    @dogs = Dog.all
+    @per_page = params[:per_page] || 5
+    if sort_params[:sort]
+      dogs = Dog.with_likes_count_per_hour
+    else
+      dogs = Dog.all
+    end
+    @total_count = dogs.size
+    @dogs = dogs.paginate(page: params[:page], per_page: @per_page)
   end
 
   # GET /dogs/1
@@ -28,7 +36,7 @@ class DogsController < ApplicationController
 
     respond_to do |format|
       if @dog.save
-        @dog.images.attach(params[:dog][:image]) if params[:dog][:image].present?
+        @dog.images.attach(params[:dog][:images]) if params[:dog][:images].present?
 
         format.html { redirect_to @dog, notice: 'Dog was successfully created.' }
         format.json { render :show, status: :created, location: @dog }
@@ -44,7 +52,7 @@ class DogsController < ApplicationController
   def update
     respond_to do |format|
       if @dog.update(dog_params)
-        @dog.images.attach(params[:dog][:image]) if params[:dog][:image].present?
+        @dog.images.attach(params[:dog][:images]) if params[:dog][:images].present?
 
         format.html { redirect_to @dog, notice: 'Dog was successfully updated.' }
         format.json { render :show, status: :ok, location: @dog }
@@ -73,6 +81,10 @@ class DogsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def dog_params
-      params.require(:dog).permit(:name, :description, :images)
+      params.require(:dog).permit(:name, :description, :images).merge(user_id: current_user.id)
+    end
+
+    def sort_params
+      params.permit(:sort)
     end
 end

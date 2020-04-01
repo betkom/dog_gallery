@@ -1,5 +1,7 @@
 {
   "name": "dog-profile",
   "private": true,
-  "dependencies": {}
+  "dependencies": {
+    "react-material-design-lite": "^0.6.0"
+  }
 }

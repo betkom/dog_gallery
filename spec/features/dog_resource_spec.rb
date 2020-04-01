@@ -24,4 +24,11 @@ describe 'Dog resource', type: :feature do
     click_link "Delete #{dog.name}'s Profile"
     expect(Dog.count).to eq(0)
   end
+
+  it 'can display the dogs' do
+    6.times do
+      create(:dog)
+    end
+    visit dogs_path
+  end
 end

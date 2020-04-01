@@ -13,6 +13,18 @@
 //= require rails-ujs
 //= require activestorage
 //= require turbolinks
+//= require react
+//= require react_ujs
+//= require material
+//= require jquery
+//= require jquery_ujs
+//= require bootstrap
+//= require components
+//= require react
+//= require react_ujs
+//= require components
 //= require_tree .
 
-console.log('Welcome!');
+document.addEventListener('turbolinks:load', function() {
+  componentHandler.upgradeDom();
+});

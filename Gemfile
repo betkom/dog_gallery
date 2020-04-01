@@ -34,10 +34,18 @@ gem 'jbuilder', '~> 2.5'
 # gem 'capistrano-rails', group: :development
 
 gem 'devise'
+gem 'cancancan'
 gem 'simple_form'
 
+gem 'react-rails'
+gem 'jquery-rails'
+gem 'bootstrap-sass'
+
+gem 'material_design_lite-sass'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
+
+gem 'will_paginate'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

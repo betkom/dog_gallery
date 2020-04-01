@@ -7,31 +7,58 @@
 
     <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track": "reload" %>
     <%= javascript_include_tag "application", "data-turbolinks-track": "reload" %>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
   </head>
 
   <body>
-    <div id="layout">
-      <header>
-        <h1><%= link_to 'Dog Profile Demo', root_path %></h1>
-        <div class="actions">
-          <% if current_user %>
-            <%= link_to 'Add your dog', new_dog_path %>
-            <%= link_to 'Sign out', destroy_user_session_path, method: :delete %>
-          <% else %>
-            <%= link_to 'Sign in', new_user_session_path %>
-            <%= link_to 'Sign up', new_user_registration_path %>
-          <% end %>
+    <div class="mdl-layout mdl-js-layout">
+      <header class="mdl-layout__header mdl-layout__header--scroll">
+        <div class="mdl-layout__header-row">
+          <!-- Title -->
+          <span class="mdl-layout-title"><%= link_to 'Dog Profile Demo', root_path %></span>
+          <!-- Add spacer, to align navigation to the right -->
+          <div class="mdl-layout-spacer"></div>
+          <!-- Navigation. We hide it in small screens. -->
+          <nav class="mdl-navigation mdl-layout--large-screen-only">
+            <% if current_user %>
+              <%= link_to 'Add your dog', new_dog_path, class: "mdl-navigation__link" %>
+              <%= link_to 'Sign out', destroy_user_session_path, method: :delete, class: "mdl-navigation__link"%>
+            <% else %>
+              <%= link_to 'Sign in', new_user_session_path, class: "mdl-navigation__link"%>
+              <%= link_to 'Sign up', new_user_registration_path, class: "mdl-navigation__link" %>
+            <% end %>
+          </nav>
         </div>
       </header>
-      <div id="main">
-        <div class="notifications">
-          <p class="notice"><%= notice %></p>
-          <p class="alert"><%= alert %></p>
-        </div>
-        <%= yield %>
+      <div class="mdl-layout__drawer">
+        <span class="mdl-layout-title"><%= link_to 'Dog Profile Demo', root_path %></span>
+        <nav class="mdl-navigation">
+          <% if current_user %>
+            <%= link_to 'Add your dog', new_dog_path, class: "mdl-navigation__link" %>
+            <%= link_to 'Sign out', destroy_user_session_path, method: :delete, class: "mdl-navigation__link"%>
+          <% else %>
+            <%= link_to 'Sign in', new_user_session_path, class: "mdl-navigation__link"%>
+            <%= link_to 'Sign up', new_user_registration_path, class: "mdl-navigation__link" %>
+          <% end %>
+        </nav>
       </div>
-      <div class="footer"></div>
+      <main class="mdl-layout__content">
+        <div class="page-content">
+          <div class="notifications">
+            <p class="notice"><%= notice %></p>
+            <p class="alert"><%= alert %></p>
+          </div>
+          <%= yield %>
+        </div>
+      </main>
+      <footer class="mdl-mini-footer">
+        <div class="mdl-mini-footer__left-section">
+          <ul class="mdl-mini-footer__link-list">
+            <li><a href="#">Help</a></li>
+            <li><a href="#">Privacy & Terms</a></li>
+          </ul>
+        </div>
+      </footer>
     </div>
-
   </body>
 </html>
