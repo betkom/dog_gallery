@@ -1,6 +1,6 @@
 
 <a href="<%= url_for(dog) %>">
-<div class="mdl-card demo-card-square mdl-cell mdl-cell--4-col mdl-cell--8-col-tablet mdl-shadow--4d" style="width: 320px; height: 320px;color: #fff;">
+<div class="mdl-card mdl-shadow--2dp mdl-cell mdl-cell--4-col mdl-cell--8-col-tablet mdl-shadow--4d" style="width: 320px; height: 320px;color: #fff;">
   <div 
     class="mdl-card__title" 
     style="background: url(<%= url_for(dog.images.first) %>) center / cover;height:250px;"
@@ -17,5 +17,5 @@
 </div>
 </a>
 <% if dog.id % 2 == 0 %>
-    <%= image_tag("ad.jpg") %>
+    <%= image_tag("ad.jpg", style:"width: 100px;", alt: "ads")%>
 <% end %>

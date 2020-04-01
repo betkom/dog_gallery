@@ -1,6 +1,5 @@
 class LikesController < ApplicationController
   before_action :find_dog
-  # load_and_authorize_resource
 
   def create
     if liked?

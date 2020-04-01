@@ -3,3 +3,4 @@ json.records do
 end
 json.total_count @total_count
 json.per_page @per_page
+json.current_page @dogs.current_page
