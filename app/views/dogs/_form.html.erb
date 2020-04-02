@@ -1,14 +1,18 @@
-<%= simple_form_for @dog do |f| %>
-  <%= f.input :name %>
-  <%= f.input :description, as: :text %>
-  <%= f.input :images, as: :file %>
+<div class='mdl-layout'>
+  <%= simple_form_for @dog, html: {class: 'form-group'} do |f| %>
+    <%= f.input :name, input_html: {class: 'form-control'} %>
+    <%= f.input :description, input_html: {class: 'form-control'}, as: :text %>
+    <%= f.input :images, as: :file, input_html: {class: 'form-control-file'} %>
 
 
-  <% if @dog.images.any? %>
-    <% @dog.images.each do |image| %>
-        <%= image_tag(image) %>
+    <% if @dog.images.any? %>
+      <div class='card-group'>
+        <% @dog.images.each do |image| %>
+          <%= image_tag(image, class: 'img-thumbnail rounded float-left', style: 'width:300px;') %>
+        <% end %>
+      </div>
     <% end %>
-  <% end %>
 
-  <%= f.button :submit %>
-<% end %>
+    <%= f.button :submit, class: 'btn btn-primary mb-2' %>
+  <% end %>
+</div>

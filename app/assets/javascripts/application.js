@@ -22,7 +22,7 @@
 //= require components
 //= require react
 //= require react_ujs
-//= require react-paginate/dist
+//= require react-paginate/react-paginate
 //= require_tree .
 
 document.addEventListener('turbolinks:load', function() {
